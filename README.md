@@ -41,27 +41,35 @@ Ao aplicar essa análise em diagramas de arquitetura, conseguimos prever pontos 
 ## 🚀 Como rodar o projeto
 
 ### 1. Clonar o repositório
+
 ```bash
-git clone https://github.com/seu-usuario/stride-analyzer.git
+git clone https://github.com/DenisePotenza/Vulnerabilidade-em-Arquitetura-DIO
 cd stride-analyzer
+```
+
+
 2. Criar ambiente virtual e instalar dependências
-bash
-Copiar código
+   
+```bash
+
 python3 -m venv .venv
 source .venv/bin/activate   # Linux/Mac
 .venv\Scripts\Activate      # Windows
 
 pip install -r requirements.txt
+```
+
 3. Configurar variáveis de ambiente
 Copiar .env.example para .env:
 
-bash
-Copiar código
-cp .env.example .env
-E preencher com as chaves do Azure:
+```bash
 
-ini
-Copiar código
+cp .env.example .env
+```
+
+E preencher com as chaves do Azure:
+```ini
+
 CV_ENDPOINT=https://<seu-endpoint-computer-vision>.cognitiveservices.azure.com/
 CV_KEY=<sua-chave-computer-vision>
 
@@ -69,25 +77,29 @@ OAI_ENDPOINT=https://<seu-resource-openai>.openai.azure.com/
 OAI_KEY=<sua-chave-azure-openai>
 OAI_DEPLOYMENT=<nome-do-deployment>
 OAI_API_VERSION=2023-12-01-preview
+```
+
 4. Rodar servidor
-bash
-Copiar código
+```bash
+
 uvicorn app.main:app --reload
+```
+
 5. Testar API
-Abrir no navegador:
+Abrir no navegador:  
 👉 http://127.0.0.1:8000/docs
 
-Aqui você pode enviar uma imagem com a arquitetura e receber a análise STRIDE automaticamente.
 
 🧪 Exemplo de uso
 Chamada via curl
-bash
-Copiar código
+```bash
+
 curl -X POST "http://127.0.0.1:8000/analyze/" \
   -F "file=@diagrama.png"
+```
+
 Chamada via Python
-python
-Copiar código
+```python
 import requests
 
 url = "http://127.0.0.1:8000/analyze/"
@@ -95,6 +107,8 @@ files = {"file": open("diagrama.png", "rb")}
 
 response = requests.post(url, files=files)
 print(response.json())
+```
+
 🌍 Reflexão final
 Com esse projeto percebi que engenharia de segurança não é só sobre proteger sistemas prontos, mas também detectar vulnerabilidades antes mesmo do código estar em produção.
 Utilizar IA (Azure OpenAI) junto com metodologias de segurança pode acelerar muito esse processo, tornando-o mais acessível e automatizado.
